@@ -4,28 +4,50 @@ import ST from '../../styles/styles';
 import { api, getUser } from '../../services/api';
 
 const S = {
-  page:          { ...ST.app, padding: '40px 20px', display: 'flex', justifyContent: 'center', alignItems: 'flex-start' },
+  page:         { ...ST.app, padding: '40px 20px', display: 'flex', justifyContent: 'center', alignItems: 'flex-start' },
   container:     { width: '100%', maxWidth: 720, display: 'flex', flexDirection: 'column', gap: 24 },
-  backBtn:       { background: 'transparent', border: 'none', color: '#FF6B35', fontSize: 15, fontWeight: 700, cursor: 'pointer', padding: 0, width: 'fit-content' },
+  backBtn:       { background: 'transparent', border: 'none', color: '#b828ff', fontSize: 15, fontWeight: 700, cursor: 'pointer', padding: 0, width: 'fit-content' },
   header:        { display: 'flex', flexDirection: 'column', gap: 6 },
-  headerTitle:   { fontSize: 32, fontWeight: 900, margin: 0, background: 'linear-gradient(135deg,#FF6B35,#e94560)', WebkitBackgroundClip: 'text', WebkitTextFillColor: 'transparent' },
+  headerTitle:   { fontSize: 32, fontWeight: 900, margin: 0, background: 'linear-gradient(135deg,#7928ca,#b828ff)', WebkitBackgroundClip: 'text', WebkitTextFillColor: 'transparent' },
   headerSub:     { margin: 0, fontSize: 15, color: '#888' },
   fieldset:      { ...ST.mContent, display: 'flex', flexDirection: 'column', gap: 0, padding: 24 },
-  legend:        { fontSize: 13, fontWeight: 700, color: '#FF6B35', textTransform: 'uppercase', letterSpacing: 1, marginBottom: 16 },
+  legend:        { fontSize: 13, fontWeight: 700, color: '#b828ff', textTransform: 'uppercase', letterSpacing: 1, marginBottom: 16 },
   formRow:       { display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 16 },
   formGroup:     { display: 'flex', flexDirection: 'column', marginBottom: 16 },
   formGroupLast: { display: 'flex', flexDirection: 'column', marginBottom: 0 },
   errorMsg:      { color: '#e74c3c', fontSize: 12, fontWeight: 700, marginTop: 4 },
   inputError:    { borderColor: '#e74c3c' },
   charCount:     { fontSize: 12, color: '#555', textAlign: 'right', marginTop: 2 },
-  submitBtn:     { ...ST.btn, padding: '14px 0', width: '90%', fontSize: 17, borderRadius: 8 },
+  submitBtn:     { 
+    ...ST.btn, 
+    padding: '14px 0', 
+    width: '90%', 
+    fontSize: 17, 
+    borderRadius: 8, 
+    background: 'linear-gradient(135deg, #7928ca, #b828ff)',
+    color: '#fff',
+    border: 'none',
+    fontWeight: 'bold',
+    cursor: 'pointer'
+  },
   loginPrompt:   { ...ST.mContent, textAlign: 'center', padding: 40, display: 'flex', flexDirection: 'column', alignItems: 'center', gap: 16 },
   successWrap:   { ...ST.app, display: 'flex', justifyContent: 'center', alignItems: 'center' },
   successCard:   { ...ST.mContent, textAlign: 'center', maxWidth: 520, display: 'flex', flexDirection: 'column', alignItems: 'center', gap: 16, margin: '60px auto' },
-  successIcon:   { width: 70, height: 70, borderRadius: '50%', background: 'linear-gradient(135deg,#FF6B35,#e94560)', color: '#fff', fontSize: 36, display: 'flex', alignItems: 'center', justifyContent: 'center' },
+  successIcon:   { width: 70, height: 70, borderRadius: '50%', background: 'linear-gradient(135deg,#7928ca,#b828ff)', color: '#fff', fontSize: 36, display: 'flex', alignItems: 'center', justifyContent: 'center' },
   successTitle:  { fontSize: 26, margin: 0 },
   successText:   { fontSize: 15, color: '#aaa', lineHeight: 1.6, margin: 0 },
-  backToShopBtn: { ...ST.btn, padding: '12px 30px', fontSize: 15, marginTop: 8 },
+  backToShopBtn: { 
+    ...ST.btn, 
+    padding: '12px 30px', 
+    fontSize: 15, 
+    marginTop: 8,
+    background: 'linear-gradient(135deg, #7928ca, #b828ff)',
+    color: '#fff',
+    border: 'none',
+    fontWeight: 'bold',
+    cursor: 'pointer',
+    borderRadius: '6px'
+  },
 };
 
 function ServicePage() {
@@ -35,9 +57,9 @@ function ServicePage() {
   const user = getUser();
 
   const [formData, setFormData] = useState({
-    nume:     user?.name  || '',
-    email:    user?.email || '',
-    telefon:  user?.phone || '',
+    nume:    user?.name  || '',
+    email:   user?.email || '',
+    telefon: user?.phone || '',
     descriere: '',
     data: '',
   });
@@ -115,9 +137,9 @@ function ServicePage() {
           <div style={S.successIcon}>✓</div>
           <h2 style={S.successTitle}>Cerere trimisa cu succes!</h2>
           <p style={S.successText}>
-            Te vom contacta la <strong style={{ color: '#FF6B35' }}>{formData.email}</strong> sau la{' '}
-            <strong style={{ color: '#FF6B35' }}>{formData.telefon}</strong> pentru confirmarea programarii din{' '}
-            <strong style={{ color: '#FF6B35' }}>
+            Te vom contacta la <strong style={{ color: '#b828ff' }}>{formData.email}</strong> sau la{' '}
+            <strong style={{ color: '#b828ff' }}>{formData.telefon}</strong> pentru confirmarea programarii din{' '}
+            <strong style={{ color: '#b828ff' }}>
               {new Date(formData.data).toLocaleDateString('ro-RO', { day: 'numeric', month: 'long', year: 'numeric' })}
             </strong>.
           </p>

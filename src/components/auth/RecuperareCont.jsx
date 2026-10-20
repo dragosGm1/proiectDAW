@@ -35,6 +35,20 @@ function RecuperareCont() {
         });
     };
 
+    // Stil comun cu gradient mov pentru butoanele de acțiune
+    const purpleGradientBtnStyle = {
+        background: 'linear-gradient(135deg, #7928ca, #b828ff)',
+        color: '#fff',
+        border: 'none',
+        cursor: 'pointer',
+        borderRadius: '50px',
+        display: 'flex',
+        justifyContent: 'center',
+        alignItems: 'center',
+        fontWeight: 'bold',
+        boxShadow: '0 4px 15px rgba(121, 40, 202, 0.4)',
+    };
+
     return (
         <>
             <button
@@ -47,10 +61,22 @@ function RecuperareCont() {
 
             <div className="recover-page container">
                 <div className="header">
-                    <div className="text">
+                    <div 
+                        className="text"
+                        style={{
+                            background: 'linear-gradient(135deg, #7928ca, #b828ff)',
+                            WebkitBackgroundClip: 'text',
+                            WebkitTextFillColor: 'transparent',
+                            backgroundClip: 'text',
+                            color: 'transparent'
+                        }}
+                    >
                         Recuperare Cont
                     </div>
-                    <div className="underline"></div>
+                    <div 
+                        className="underline"
+                        style={{ background: 'linear-gradient(135deg, #7928ca, #b828ff)' }}
+                    ></div>
                 </div>
 
                 <div className="recover-description">
@@ -64,13 +90,20 @@ function RecuperareCont() {
                     </div>
                 </div>
 
-                <div className="submit-container">
-                    <div className="submit">
+                <div className="submit-container" style={{ display: 'flex', justifyContent: 'center', marginTop: '30px' }}>
+                    <div 
+                        className="submit"
+                        style={{ ...purpleGradientBtnStyle, padding: '12px 30px', width: '100%', fontSize: '16px' }}
+                    >
                         Reset password
                     </div>
                 </div>
 
-                <div className="back-login" onClick={() => navigate('/login')}>
+                <div 
+                    className="back-login" 
+                    style={{ marginTop: '20px', textAlign: 'center', cursor: 'pointer', color: '#b828ff', fontWeight: '500' }} 
+                    onClick={() => navigate('/login')}
+                >
                     Înapoi la Login
                 </div>
             </div>

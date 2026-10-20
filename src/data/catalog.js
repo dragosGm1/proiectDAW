@@ -98,11 +98,11 @@ const pcSystemsModels = [
     { name: 'PC Gaming DRAGON Legendar MaxPlus', image: '/images/sisteme/dragon.png', price: 6199.99 },
     { name: 'PC Gaming Arkay', image: '/images/sisteme/arkay.png', price: 3599.99 },
     { name: 'PC Gaming Sorcerer', image: '/images/sisteme/sorcerer.png', price: 5499.99 },
-    { name: 'PC Gaming Serpent V2', image: '/images/sisteme/serpent-v2.png', price: 4199.99 },
-    { name: 'PC Gaming Helix', image: '/images/sisteme/helix.png', price: 6499.99 },
-    { name: 'PC Gaming Corvus', image: '/images/sisteme/corvus.png', price: 1499.99 },
-    { name: 'PC Gaming Cerberus Powered by ASUS', image: '/images/sisteme/cerberus.png', price: 7999.99 },
-    { name: 'PC Gaming Viking Intel', image: '/images/sisteme/viking-intel.png', price: 2199.99 }
+    // { name: 'PC Gaming Serpent V2', image: '/images/sisteme/serpent-v2.png', price: 4199.99 },
+    // { name: 'PC Gaming Helix', image: '/images/sisteme/helix.png', price: 6499.99 },
+    // { name: 'PC Gaming Corvus', image: '/images/sisteme/corvus.png', price: 1499.99 },
+    // { name: 'PC Gaming Cerberus Powered by ASUS', image: '/images/sisteme/cerberus.png', price: 7999.99 },
+    // { name: 'PC Gaming Viking Intel', image: '/images/sisteme/viking-intel.png', price: 2199.99 }
 ];
 
 export const mockSystems = pcSystemsModels.map((productData, index) => ({
@@ -114,7 +114,7 @@ export const mockSystems = pcSystemsModels.map((productData, index) => ({
 }));
 
 export const categoryShortcuts = [
-    { name: 'Sisteme Desktop PC', id: 'section-sisteme' },
+    { name: 'Jocuri PS', id: 'section-sisteme' },
     { name: 'Procesoare', id: 'section-procesoare' },
     { name: 'Plăci Video', id: 'section-placi-video' },
     { name: 'Plăci De Bază', id: 'section-placi-baza' }

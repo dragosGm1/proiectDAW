@@ -35,6 +35,17 @@ export default function CartPage() {
     if (success) navigate("/");
   };
 
+  // Stil comun cu gradient mov pentru butoane principale
+  const purpleGradientBtnStyle = {
+    background: "linear-gradient(135deg, #7928ca, #b828ff)",
+    color: "#ffffff",
+    border: "none",
+    borderRadius: "6px",
+    fontWeight: "bold",
+    cursor: "pointer",
+    boxShadow: "0 2px 5px rgba(0,0,0,0.2)",
+  };
+
   return (
     <div style={ST.app}>
       {/* Notificari */}
@@ -64,7 +75,16 @@ export default function CartPage() {
           <div style={{ textAlign: "center", padding: 60, color: "#555" }}>
             <div style={{ fontSize: 64 }}>🛒</div>
             <p>Cosul este gol</p>
-            <button style={ST.btn} onClick={() => navigate("/")}>
+            {/* Butonul Continua cumparaturile stilizat cu mov */}
+            <button 
+              style={{ 
+                ...ST.btn, 
+                ...purpleGradientBtnStyle, 
+                padding: "12px 24px", 
+                fontSize: 15 
+              }} 
+              onClick={() => navigate("/")}
+            >
               Continua cumparaturile
             </button>
           </div>
@@ -93,12 +113,18 @@ export default function CartPage() {
             >
               <div>
                 <div style={{ fontSize: 14, color: "#888" }}>Total:</div>
-                <div style={{ fontSize: 28, fontWeight: 900, color: "#FF6B35" }}>
+                <div style={{ fontSize: 28, fontWeight: 900, color: "#b828ff" }}>
                   {cartTotal.toLocaleString()} Lei
                 </div>
               </div>
+              {/* Butonul Finalizeaza comanda stilizat cu mov */}
               <button
-                style={{ ...ST.btn, padding: "14px 40px", fontSize: 16 }}
+                style={{ 
+                  ...ST.btn, 
+                  ...purpleGradientBtnStyle, 
+                  padding: "14px 40px", 
+                  fontSize: 16 
+                }}
                 onClick={() => {
                   if (!user) {
                     notify("Trebuie sa te autentifici!", "error");

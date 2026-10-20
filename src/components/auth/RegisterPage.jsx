@@ -60,6 +60,20 @@ function RegisterPage() {
     }
   };
 
+  // Stil comun cu gradient mov pentru butoanele de acțiune
+  const purpleGradientBtnStyle = {
+    background: 'linear-gradient(135deg, #7928ca, #b828ff)',
+    color: '#fff',
+    border: 'none',
+    cursor: 'pointer',
+    borderRadius: '50px',
+    display: 'flex',
+    justifyContent: 'center',
+    alignItems: 'center',
+    fontWeight: 'bold',
+    boxShadow: '0 4px 15px rgba(121, 40, 202, 0.4)',
+  };
+
   return (
     <>
       <button
@@ -72,8 +86,23 @@ function RegisterPage() {
 
       <div className="register-page container">
         <div className="header">
-          <div className="text">Register</div>
-          <div className="underline"></div>
+          {/* Textul de Register cu gradient mov */}
+          <div 
+            className="text"
+            style={{
+              background: 'linear-gradient(135deg, #7928ca, #b828ff)',
+              WebkitBackgroundClip: 'text',
+              WebkitTextFillColor: 'transparent',
+              backgroundClip: 'text',
+              color: 'transparent'
+            }}
+          >
+            Register
+          </div>
+          <div 
+            className="underline"
+            style={{ background: 'linear-gradient(135deg, #7928ca, #b828ff)' }}
+          ></div>
         </div>
 
         <form onSubmit={handleRegister}>
@@ -103,14 +132,14 @@ function RegisterPage() {
           )}
 
           <div className="have-account">
-            Ai deja cont? <span onClick={() => navigate('/login')}>Sign in</span>
+            Ai deja cont? <span style={{ color: '#b828ff', cursor: 'pointer' }} onClick={() => navigate('/login')}>Sign in</span>
           </div>
 
-          <div className="submit-container">
+          <div className="submit-container" style={{ display: 'flex', justifyContent: 'center', marginTop: '30px' }}>
             <button
               type="submit"
               className="submit"
-              style={{ border: 'none', cursor: 'pointer', width: '100%' }}
+              style={{ ...purpleGradientBtnStyle, padding: '12px 0', width: '100%', fontSize: '16px' }}
               disabled={loading}
             >
               {loading ? '...' : 'Register'}

@@ -8,10 +8,64 @@ import { matchesSearchQuery } from '../data/catalog';
 import { api, getUser } from '../services/api';
 
 const SECTIONS = [
-  { id: 'section-sisteme',     title: 'Sisteme Desktop PC', slug: 'sisteme' },
-  { id: 'section-procesoare',  title: 'Procesoare',         slug: 'procesoare' },
-  { id: 'section-placi-video', title: 'Plăci Video',        slug: 'placi-video' },
-  { id: 'section-placi-baza',  title: 'Plăci De Bază',      slug: 'placi-baza' },
+  { id: 'section-jocuri-ps', title: 'Jocuri PS', slug: 'sisteme' },
+  { id: 'section-procesoare', title: 'Procesoare', slug: 'procesoare' },
+  { id: 'section-placi-video', title: 'Plăci Video', slug: 'placi-video' },
+  { id: 'section-placi-baza', title: 'Plăci De Bază', slug: 'placi-baza' },
+];
+
+// Jocurile PS definite ca înlocuitor direct pentru sloturile de sisteme
+const PS_GAMES = [
+  { 
+    id: 'ps-game-1',
+    categorySlug: 'sisteme',
+    name: "Marvel's Spider-Man (PS4)", 
+    price: 199.99, 
+    installments: 50,
+    rating: 5,
+    stock: 10,
+    image: "https://s13emagst.akamaized.net/products/13349/13348578/images/res_afdc48d63bb971b6f8f7809a233a3420.jpg?width=720&height=720&hash=E73824603E9E966C4EFE36D9852B672E"
+  },
+  { 
+    id: 'ps-game-2',
+    categorySlug: 'sisteme',
+    name: "Naruto Shippuden: Ultimate Ninja Storm 4 (PS4)", 
+    price: 149.99, 
+    installments: 37.5,
+    rating: 5,
+    stock: 8,
+    image: "https://cdn.usedproducts.ro/products/a512b8cc-8621-476a-b58d-ca1298887989/main.jpg"
+  },
+  { 
+    id: 'ps-game-3',
+    categorySlug: 'sisteme',
+    name: "Red Dead Redemption II (PS4)", 
+    price: 249.99, 
+    installments: 62.5,
+    rating: 5,
+    stock: 15,
+    image: "https://upload.wikimedia.org/wikipedia/en/4/44/Red_Dead_Redemption_II.jpg"
+  },
+  { 
+    id: 'ps-game-4',
+    categorySlug: 'sisteme',
+    name: "Grand Theft Auto V (PS5)", 
+    price: 179.99, 
+    installments: 45,
+    rating: 5,
+    stock: 12,
+    image: "https://upload.wikimedia.org/wikipedia/en/a/a5/Grand_Theft_Auto_V.png"
+  },
+  { 
+    id: 'ps-game-5',
+    categorySlug: 'sisteme',
+    name: "Demon Slayer: Kimetsu no Yaiba (PS4)", 
+    price: 229.99, 
+    installments: 57.5,
+    rating: 4,
+    stock: 6,
+    image: "https://s13emagst.akamaized.net/products/41139/41138833/images/res_1b4ea6bd33ba4248bcfee00685ff63a4.png?width=720&height=720&hash=CE3AB95BCB8590F46CAB57FB2847CF5F"
+  },
 ];
 
 function HomePage() {
@@ -33,7 +87,14 @@ function HomePage() {
 
   useEffect(() => {
     Promise.all([api('/products'), api('/promotions/active')])
-      .then(([prods, promos]) => { setProducts(prods); setPromotions(promos); })
+      .then(([prods, promos]) => { 
+        // 1. Ștergem doar sistemele vechi (cele cu categorySlug === 'sisteme' venite de la server)
+        const nonSystemProducts = prods.filter(p => p.categorySlug !== 'sisteme');
+        
+        // 2. Păstrăm tot restul (procesoare, plăci video, etc.) și adăugăm jocurile noastre PS
+        setProducts([...PS_GAMES, ...nonSystemProducts]); 
+        setPromotions(promos); 
+      })
       .catch(() => {})
       .finally(() => setLoadingProds(false));
   }, []);
@@ -108,7 +169,7 @@ function HomePage() {
         {promo && (
           <div style={{
             position: 'absolute', top: 8, left: 8, zIndex: 2,
-            background: 'linear-gradient(135deg,#FF6B35,#e94560)',
+            background: 'linear-gradient(135deg, #7928ca, #b828ff)',
             color: '#fff', fontSize: 11, fontWeight: 700,
             padding: '3px 8px', borderRadius: 4,
           }}>
@@ -119,11 +180,12 @@ function HomePage() {
           style={{ cursor: 'pointer', width: '100%', display: 'flex', flexDirection: 'column', alignItems: 'center' }}
           onClick={() => navigate(`/product/${product.id}`, { state: { product, promo } })}
         >
-          <div className="image-wrapper">
+          <div className="image-wrapper" style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', background: '#fff' }}>
             <img
               src={product.image}
               alt={product.name}
               className="product-img"
+              style={{ maxHeight: '190px', objectFit: 'contain' }}
               onError={e => { e.target.src = 'https://via.placeholder.com/200?text=Fara+Imagine'; }}
             />
           </div>
@@ -137,7 +199,7 @@ function HomePage() {
                 <span style={{ textDecoration: 'line-through', color: '#888', fontSize: 14, marginRight: 6 }}>
                   {Number(product.price).toFixed(2).replace('.', ',')}
                 </span>
-                <span style={{ color: '#2ecc71' }}>
+                <span style={{ color: '#b828ff' }}>
                   {discountedPrice.toFixed(2).replace('.', ',')} RON
                 </span>
               </>
@@ -158,6 +220,12 @@ function HomePage() {
         <button
           className="add-to-cart-btn"
           disabled={product.stock === 0}
+          style={{
+            background: product.stock === 0 ? undefined : 'linear-gradient(135deg, #7928ca, #b828ff)',
+            border: 'none',
+            color: '#fff',
+            cursor: product.stock === 0 ? 'not-allowed' : 'pointer'
+          }}
           onClick={e => handleAddToCart(e, product)}
         >
           {product.stock === 0 ? 'Stoc epuizat' : 'Adauga in cos'}
@@ -181,7 +249,7 @@ function HomePage() {
 
       <div className="main-content">
         {pageQuery && (
-          <div className="search-filter-banner">
+          <div className="search-filter-banner" style={{ borderLeft: '4px solid #b828ff' }}>
             <span>Rezultate pentru: <strong>&quot;{pageQuery}&quot;</strong> ({totalVisible} produse)</span>
             <button type="button" className="clear-search-btn" onClick={clearPageSearch}>Șterge filtrul</button>
           </div>
@@ -203,7 +271,7 @@ function HomePage() {
             if (pageQuery && sectionProducts.length === 0) return null;
             return (
               <section key={section.id} id={section.id} className="product-section">
-                <h2>{section.title}</h2>
+                <h2 style={{ borderBottom: '2px solid #7928ca', paddingBottom: '8px' }}>{section.title}</h2>
                 <div className="product-grid">
                   {sectionProducts.map(renderProduct)}
                 </div>
@@ -214,7 +282,9 @@ function HomePage() {
       </div>
 
       {notification && (
-        <div className={`notification-toast ${notification.type}`}>{notification.msg}</div>
+        <div className={`notification-toast ${notification.type}`} style={{ background: notification.type === 'success' ? 'linear-gradient(135deg, #7928ca, #b828ff)' : undefined }}>
+          {notification.msg}
+        </div>
       )}
 
       <Footer />
@@ -225,9 +295,19 @@ function HomePage() {
 function Footer() {
   return (
     <div style={{ ...ST.footer, padding: '20px 40px', display: 'flex', flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center', flexWrap: 'wrap', gap: 20 }}>
-      <div style={{ color: '#888', fontSize: 14 }}>&copy; {new Date().getFullYear()} Pc Garage. Toate drepturile rezervate.</div>
+      <div style={{ color: '#888', fontSize: 14 }}>
+        &copy; {new Date().getFullYear()}{' '}
+        <strong style={{
+          background: 'linear-gradient(135deg, #7928ca, #b828ff)',
+          WebkitBackgroundClip: 'text',
+          WebkitTextFillColor: 'transparent',
+          fontSize: '16px'
+        }}>
+          Gaming for All
+        </strong>. Toate drepturile rezervate.
+      </div>
       <div style={{ display: 'flex', gap: 24, alignItems: 'center' }}>
-        <span style={{ color: '#e0e0e0', fontSize: 14 }}>✉️ support@pcgarage.ro</span>
+        <span style={{ color: '#e0e0e0', fontSize: 14 }}>✉️ support@gamingforall.ro</span>
         <span style={{ color: '#e0e0e0', fontSize: 14 }}>📞 0123 456 789</span>
       </div>
     </div>

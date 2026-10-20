@@ -57,6 +57,26 @@ function LoginPage() {
     }
   };
 
+  // Stil comun cu gradient mov și dimensiuni fix ancorei/butoanelor pentru a fi egale
+  const purpleGradientBtnStyle = {
+    background: 'linear-gradient(135deg, #7928ca, #b828ff)',
+    color: '#fff',
+    border: 'none',
+    cursor: 'pointer',
+    borderRadius: '50px',
+    display: 'flex',
+    justifyContent: 'center',
+    alignItems: 'center',
+    fontWeight: 'bold',
+    boxShadow: '0 4px 15px rgba(121, 40, 202, 0.4)',
+    flex: 1,
+    padding: '12px 0',
+    fontSize: '16px',
+    textAlign: 'center',
+    boxSizing: 'border-box',
+    textDecoration: 'none'
+  };
+
   return (
     <>
       <button
@@ -69,8 +89,23 @@ function LoginPage() {
 
       <div className="login-page container">
         <div className="header">
-          <div className="text">Login</div>
-          <div className="underline"></div>
+          {/* Textul de Login cu gradient mov pentru consistență */}
+          <div 
+            className="text" 
+            style={{
+              background: 'linear-gradient(135deg, #7928ca, #b828ff)',
+              WebkitBackgroundClip: 'text',
+              WebkitTextFillColor: 'transparent',
+              backgroundClip: 'text',
+              color: 'transparent'
+            }}
+          >
+            Login
+          </div>
+          <div 
+            className="underline" 
+            style={{ background: 'linear-gradient(135deg, #7928ca, #b828ff)' }}
+          ></div>
         </div>
 
         <form onSubmit={handleLogin}>
@@ -109,16 +144,22 @@ function LoginPage() {
               <label htmlFor="remember">Tine-ma minte</label>
             </div>
             <div className="forgot-password">
-              Ai uitat parola? <span onClick={() => navigate('/recuperare-cont')}>Click here</span>
+              Ai uitat parola? <span style={{ color: '#b828ff', cursor: 'pointer' }} onClick={() => navigate('/recuperare-cont')}>Click here</span>
             </div>
           </div>
 
-          <div className="submit-container">
-            <div className="submit" onClick={() => navigate('/register')}>Sign up</div>
+          <div className="submit-container" style={{ display: 'flex', gap: '20px', justifyContent: 'center', marginTop: '30px' }}>
+            <div 
+              className="submit" 
+              style={purpleGradientBtnStyle} 
+              onClick={() => navigate('/register')}
+            >
+              Sign up
+            </div>
             <button
               type="submit"
               className="submit"
-              style={{ border: 'none', cursor: 'pointer' }}
+              style={purpleGradientBtnStyle}
               disabled={loading}
             >
               {loading ? '...' : 'Login'}
@@ -126,7 +167,7 @@ function LoginPage() {
           </div>
         </form>
 
-        <div className="back-home" onClick={() => navigate('/')}>
+        <div className="back-home" style={{ marginTop: '20px', textAlign: 'center', cursor: 'pointer', color: '#b828ff', fontWeight: '500' }} onClick={() => navigate('/')}>
           Înapoi la pagina principală
         </div>
       </div>

@@ -126,7 +126,7 @@ function ProductPage() {
                             
                             <div className="delivery-info">
                                 <span className="in-stock">● În stoc</span>
-                                <p>Vândut și livrat de: <strong>PC Garage</strong></p>
+                                <p>Vândut și livrat de: <strong>Gaming for All</strong></p>
                                 <p className="rate-info-box">
                                     Sau în 4 rate fără dobândă de doar {product.installments} RON
                                 </p>
@@ -153,7 +153,20 @@ function ProductPage() {
                             placeholder="Lasă o recenzie pentru acest produs..."
                             rows="4"
                         ></textarea>
-                        <button type="submit" className="submit-review-btn">Adaugă Recenzie</button>
+                        {/* Butonul de adaugă recenzie stilizat cu gradient mov */}
+                        <button 
+                            type="submit" 
+                            className="submit-review-btn"
+                            style={{
+                                background: 'linear-gradient(135deg, #7928ca, #b828ff)',
+                                color: '#ffffff',
+                                border: 'none',
+                                fontWeight: 'bold',
+                                cursor: 'pointer'
+                            }}
+                        >
+                            Adaugă Recenzie
+                        </button>
                     </form>
 
                     <div className="reviews-list">

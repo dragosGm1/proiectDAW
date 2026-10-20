@@ -6,11 +6,20 @@
     align-items: center;
     justify-content: flex-end;
 }
-.lista-container{
+
+.lista-container {
     font-size: 40px;
-    color: #3c009d;
     display: flex;
     flex-direction: row;
+}
+
+/* Forțăm textul din side bar să fie mov gradient, indiferent în ce tag se află literele */
+.lista-container, .lista-container * {
+    background: linear-gradient(135deg, #7928ca, #b828ff) !important;
+    -webkit-background-clip: text !important;
+    -webkit-text-fill-color: transparent !important;
+    background-clip: text !important;
+    color: transparent !important;
 }
 
 /* ==================================================
@@ -33,7 +42,16 @@ body {
     color: white;
 }
 .dark-theme .header-bar { background-color: #1a1a1a; border-bottom: 1px solid #333; }
-.dark-theme .home-title { color: #ffffff; }
+
+/* Forțăm textul din titlul PC Garage să fie mov gradient pe Dark Mode */
+.dark-theme .home-title, .dark-theme .home-title * { 
+    background: linear-gradient(135deg, #7928ca, #b828ff) !important;
+    -webkit-background-clip: text !important;
+    -webkit-text-fill-color: transparent !important;
+    background-clip: text !important;
+    color: transparent !important;
+}
+
 .dark-theme .product-card { background-color: #2b2b2b; }
 .dark-theme .section-title { color: #a0a0a0; }
 .dark-theme .product-title { color: #dddddd; }
@@ -46,7 +64,16 @@ body {
     color: #000000 !important;
 }
 .light-theme .header-bar { background-color: #f8f8f8 !important; border-bottom: 1px solid #e0e0e0; }
-.light-theme .home-title { color: #000000 !important; }
+
+/* Forțăm textul din titlul PC Garage să fie mov gradient pe Light Mode */
+.light-theme .home-title, .light-theme .home-title * { 
+    background: linear-gradient(135deg, #7928ca, #b828ff) !important;
+    -webkit-background-clip: text !important;
+    -webkit-text-fill-color: transparent !important;
+    background-clip: text !important;
+    color: transparent !important;
+}
+
 .light-theme .product-card { background-color: #f1f1f1 !important; border: 1px solid #e0e0e0; box-shadow: 0 2px 5px rgba(0,0,0,0.05); }
 .light-theme .section-title { color: #000000 !important; }
 .light-theme .product-title { color: #000000 !important; font-weight: bold; }
